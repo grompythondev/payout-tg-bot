@@ -1,1 +1,6 @@
-# payout-tg-bot
+Token for package publication
+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
+
+Token for installing plugin
+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
+

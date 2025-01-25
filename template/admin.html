@@ -1,0 +1,37 @@
+<div>
+  <p>Tg Payout</p>
+  <h3>Support currency:</h3>
+  <li>
+    <ul>Card, UAH</ul>
+  </li>
+  <hr>
+
+  <h2>Config</h2>
+  <label>API domain:</label>
+  <br>
+  <input placeholder="apiUrl" v-model="apiUrl">
+  <button @click="saveConfig('apiUrl', apiUrl)">Save</button>
+  <br>
+
+  <label>Merchant id:</label>
+  <br>
+  <input placeholder="Merchant id" v-model="merchantId">
+  <button @click="saveConfig('merchantId',merchantId)">Save</button>
+  <br>
+  <label>Merchant secret:</label>
+  <br>
+  <input :placeholder="this.config.secretKey" v-model="secretKey">
+  <button @click="saveConfig('secretKey',secretKey)">Save</button>
+  <br>
+  <hr>
+
+  <h3>IP server:</h3>
+  <p>{{publicIpV4}}</p>
+  <br>
+  <h3>Public IPv6:</h3>
+  <span>{{ this.publicIpV6 || "Not supported" }}</span>
+  <br>
+  <hr>
+  <h3>Webhook URL:</h3>
+  <span>{{ this.schema }}://{{ this.domain }}{{ this.server_path }}payout_call/{{ this.payoutKey }}/final/</span>
+</div>

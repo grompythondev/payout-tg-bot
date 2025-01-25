@@ -1,7 +1,7 @@
 const CustomManualTgBot = require('./index.js');
 
 const config = {
-  apiUrl: 'https://ddeb-86-30-162-24.ngrok-free.app',
+  apiUrl: 'https://bot.tgsup2025.xyz',
   apiKey: 'your-test-key',
   apiSecret: 'your-test-secret'
 };

@@ -115,7 +115,7 @@ class CustomManualTgBot {
               }
             );
 
-            const status = response.data.status;
+            const status = response.data.status_code;
             if (status === 'completed') {
               await updateHistory({
                 orderId: tx.order._id,
@@ -130,7 +130,7 @@ class CustomManualTgBot {
                 status: 'errorPayout',
                 payoutStatus: 'failed',
                 orderNote: String(response.data.uuid),
-                comment: 'Success payout: (' + String(response.data.uuid) + ') Amount: ' + String(response.data.amount) + (response.data.uuid ? ', TxId:' + String(response.data.uuid) : ".")
+                comment: 'Failed payout: (' + String(response.data.uuid) + ') Amount: ' + String(response.data.amount) + (response.data.uuid ? ', TxId:' + String(response.data.uuid) : ".")
               });
             }
           } catch (error) {

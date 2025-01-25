@@ -1,4 +1,3 @@
-// test-payout.js
 const CustomManualTgBot = require('./index.js');
 
 const config = {
@@ -8,23 +7,37 @@ const config = {
   debug: '1'
 };
 
+let CREATED_TRANSACTION = null;
+
 const payout = new CustomManualTgBot(config);
 
-// Mock database functions
+// Mock database functions with proper query chaining
 const mockDb = {
-  OrderPayoutTxs: {
-    create: async (data) => {
-      console.log('Creating transaction:', data);
-      return { ...data, _id: 'mock_tx_id' };
-    },
-    find: async () => [{
-      _id: 'mock_tx_id',
-      transaction: 'mock_tx_123',
-      order: { _id: 'mock_order_id' }
-    }],
-    updateOne: async () => {}
-  }
-};
+    OrderPayoutTxs: {
+      create: async (data) => {
+        console.log('Creating transaction:', data);
+        return { ...data, _id: 'mock_tx_id' };
+      },
+      find: function() {
+        const query = {
+          populate: function() {
+            return this; // Allow method chaining
+          },
+          exec: async () => [{
+            _id: 'mock_tx_id',
+            transaction: CREATED_TRANSACTION,
+            order: { _id: 'mock_order_id' }
+          }],
+          // Make the query thenable to support await
+          then: function(resolve, reject) {
+            return this.exec().then(resolve, reject);
+          }
+        };
+        return query;
+      },
+      updateOne: async () => {}
+    }
+  };
 
 // Simulate order creation
 async function createPayoutOrder(amount, cardNumber) {
@@ -60,9 +73,18 @@ async function createPayoutOrder(amount, cardNumber) {
 // Test scenario
 async function runTest() {
   // Test with valid card
-  await createPayoutOrder(100, '4111111111111111', 'TEST USER');
-  
+  response = await createPayoutOrder(100, '4111111111111111', 'TEST USER');
+  console.log('Order response:', response);
   // Test cron check
+  CREATED_TRANSACTION = response.transaction;
+  
+  await payout.initCron({
+    db: mockDb,
+    updateHistory: (data) => console.log('Status update:', data)
+  }).fn();
+
+  await new Promise(r => setTimeout(r, 20000));
+
   await payout.initCron({
     db: mockDb,
     updateHistory: (data) => console.log('Status update:', data)

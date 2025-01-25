@@ -10,14 +10,12 @@ module.exports = {
     return {
       apiUrl: '',
       apiKey: '',
-      apiSecret: '',
-      debug: '0'
+      apiSecret: ''
     }
   },
   created() {
     this.apiUrl = this.config.apiUrl || '';
     this.apiKey = this.config.apiKey || '';
-    this.debug = this.config.debug || '0';
   },
   methods: {
     saveConfig(key, value) {

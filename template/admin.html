@@ -13,10 +13,4 @@
   <input type="password" v-model="apiSecret">
   <button @click="saveConfig('apiSecret', apiSecret)">Save</button>
 
-  <label>Debug Mode:</label>
-  <select v-model="debug">
-    <option value="1">Enabled</option>
-    <option value="0">Disabled</option>
-  </select>
-  <button @click="saveConfig('debug', debug)">Save</button>
 </div>

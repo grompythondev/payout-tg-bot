@@ -3,8 +3,7 @@ const CustomManualTgBot = require('./index.js');
 const config = {
   apiUrl: 'https://ddeb-86-30-162-24.ngrok-free.app',
   apiKey: 'your-test-key',
-  apiSecret: 'your-test-secret',
-  debug: '1'
+  apiSecret: 'your-test-secret'
 };
 
 let CREATED_TRANSACTION = null;

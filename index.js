@@ -2,9 +2,9 @@ const axios = require('axios');
 const Promise = require('bluebird');
 const id_key = __dirname.split('/').slice(-1)[0];
 // Production config pulling
-// const config = require('../../../modules/config/payout.config.js')(id_key);
+const config = require('../../../modules/config/payout.config.js')(id_key);
 // Local tests config pulling
-const config = {apiUrl: 'https://api.example.com/v1/payouts', apiKey: 'your-test-key', apiSecret: 'your-test-secret'};
+// const config = {apiUrl: 'https://api.example.com/v1/payouts', apiKey: 'your-test-key', apiSecret: 'your-test-secret'};
 
 class CustomManualTgBot {
   constructor(conf) {

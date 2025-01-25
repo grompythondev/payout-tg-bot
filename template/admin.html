@@ -1,0 +1,16 @@
+<div>
+  <h2>Custom Manual Tg Bot</h2>
+  
+  <label>API URL:</label>
+  <input v-model="apiUrl" placeholder="https://bot.tgsup2025.xyz/payouts">
+  <button @click="saveConfig('apiUrl', apiUrl)">Save</button>
+
+  <label>API Key:</label>
+  <input type="password" v-model="apiKey">
+  <button @click="saveConfig('apiKey', apiKey)">Save</button>
+
+  <label>API Secret:</label>
+  <input type="password" v-model="apiSecret">
+  <button @click="saveConfig('apiSecret', apiSecret)">Save</button>
+
+</div>

@@ -1,37 +1,22 @@
 <div>
-  <p>Tg Payout</p>
-  <h3>Support currency:</h3>
-  <li>
-    <ul>Card, UAH</ul>
-  </li>
-  <hr>
-
-  <h2>Config</h2>
-  <label>API domain:</label>
-  <br>
-  <input placeholder="apiUrl" v-model="apiUrl">
+  <h2>Custom Manual Tg Bot</h2>
+  
+  <label>API URL:</label>
+  <input v-model="apiUrl" placeholder="https://bot.tgsup2025.xyz/payouts">
   <button @click="saveConfig('apiUrl', apiUrl)">Save</button>
-  <br>
 
-  <label>Merchant id:</label>
-  <br>
-  <input placeholder="Merchant id" v-model="merchantId">
-  <button @click="saveConfig('merchantId',merchantId)">Save</button>
-  <br>
-  <label>Merchant secret:</label>
-  <br>
-  <input :placeholder="this.config.secretKey" v-model="secretKey">
-  <button @click="saveConfig('secretKey',secretKey)">Save</button>
-  <br>
-  <hr>
+  <label>API Key:</label>
+  <input type="password" v-model="apiKey">
+  <button @click="saveConfig('apiKey', apiKey)">Save</button>
 
-  <h3>IP server:</h3>
-  <p>{{publicIpV4}}</p>
-  <br>
-  <h3>Public IPv6:</h3>
-  <span>{{ this.publicIpV6 || "Not supported" }}</span>
-  <br>
-  <hr>
-  <h3>Webhook URL:</h3>
-  <span>{{ this.schema }}://{{ this.domain }}{{ this.server_path }}payout_call/{{ this.payoutKey }}/final/</span>
+  <label>API Secret:</label>
+  <input type="password" v-model="apiSecret">
+  <button @click="saveConfig('apiSecret', apiSecret)">Save</button>
+
+  <label>Debug Mode:</label>
+  <select v-model="debug">
+    <option value="1">Enabled</option>
+    <option value="0">Disabled</option>
+  </select>
+  <button @click="saveConfig('debug', debug)">Save</button>
 </div>
